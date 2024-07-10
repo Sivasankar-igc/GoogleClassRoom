@@ -1,45 +1,510 @@
-/* homepage.css */
-.container {
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Quicksand", sans-serif;
+    font-optical-sizing: auto;
+}
+
+body {
+    height: auto;
+    width: 99vw;
+    background-color: #eee;
+}
+
+header {
+    height: 60px;
+    width: 100%;
+
+}
+
+nav {
+    width: 100%;
+    height: 100%;
+    padding: 0 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5);
+    position: sticky;
+
+
+}
+
+a {
+    text-decoration: none;
+
+}
+
+.logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    width: auto;
+}
+
+.logo img {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+}
+
+.logo h2 {
+    font-size: 28px;
+}
+
+.logo span {
+    font-size: 28px;
+    margin-left: -10px;
+}
+
+.elements {
+    height: 100%;
+    width: 700px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.elements p {
+    font-size: 15px;
+    font-weight: 600;
+    color: #000;
+}
+
+.active {
+    color: rgb(86, 136, 12);
+}
+
+.elements p a:hover {
+    color: rgb(86, 136, 12);
+}
+
+
+.elements button {
+    height: 35px;
+    width: auto;
+    padding: 0 15px;
+    border-radius: 20px;
+    border: 1px solid #e4dcdc;
+    background: #0066ff;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 600;
+
+}
+
+.elements button a {
+    color: #fff;
+}
+
+.elements button:hover {
+    background: #0000ff;
+
+}
+
+
+
+
+/* ....................................................hero-section................................................... */
+
+.hero-section {
+    height: 93vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hero-section .text-container {
+    height: auto;
+    width: 500px;
+
+}
+
+.hero-section .text-container h1 {
+
+    margin-top: -60px;
+    font-size: 40px;
+}
+
+.hero-section .text-container h1 span {
+    color: rgb(1, 177, 1);
+}
+
+.hero-section .text-container p {
+    line-height: 20px;
+    font-size: 15px;
+    word-spacing: 5px;
+    margin: 20px 0;
+}
+
+.hero-section .text-container button {
+    height: 40px;
+    padding: 15px;
+    background-color: #0066ff;
+    color: #fff;
+    font-size: 15px;
+    font-weight: 600;
+    gap: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    border-radius: 6px;
+    margin-top: 10px;
+}
+
+.hero-section .text-container button:hover {
+    background: #0000ff;
+}
+
+.hero-section .image-container {
+    height: 500px;
+    width: 500px;
+    position: relative;
+
+    margin: -50px 0 0 30px;
+}
+
+.hero-section .image-container .image1 {
+    height: 100%;
+    width: 100%;
+    z-index: 1;
+}
+
+.hero-section .image-container .image2 {
+    position: absolute;
+    bottom: 15px;
+    right: 70px;
+    z-index: 100;
+    height: 320px;
+    width: 220px;
+    border-top-left-radius: 40px;
+    border-bottom-right-radius: 40px;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.75);
+    animation: imageEffect 1s 1s linear 1 forwards;
+
+}
+
+.hero-section .image-container .image3 {
+    position: absolute;
+    top: 65px;
+    left: -8px;
+    height: 200px;
+    width: 200px;
+    z-index: 100;
+    border-top-right-radius: 40px;
+    border-bottom-left-radius: 40px;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.75);
+    animation: imageEffect 1s 1s linear 1 forwards;
+}
+
+@keyframes imageEffect {
+    to {
+        transform: translateY(20px);
+    }
+}
+
+
+
+
+/* ....................................................categories-container................................................... */
+.categories-container {
+    height: 90vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.categories-container p {
+    margin-top: 30px;
+    margin-bottom: 20px;
+    font-size: 15px;
+}
+
+.categories-container h1 {
+    font-size: 36px;
+}
+
+.categories-container h1 span {
+    color: rgb(1, 177, 1);
+}
+
+.categories-container .heading {
+    letter-spacing: 4px;
+}
+
+.categories-container .card-container {
+    height: 300px;
+    width: 80%;
+    display: flex;
+    justify-content: space-around;
+}
+
+.categories-container .card-box {
+    height: 300px;
+    width: 250px;
+    background: #cdc4c4;
+    border-radius: 8px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    height: 100vh;
-    background-color: #f0f0f0;
-    padding: 20px;
+    padding: 30px 0;
+    margin-top: 80px;
+}
+
+.categories-container .card-box:hover {
+    transform: translateY(5px);
+}
+
+.categories-container .card-box .icon {
+    border-radius: 50%;
+    font-size: 30pt;
+    background: #e9dede;
+    padding: 15px;
+}
+
+.categories-container .card-box i.fa-pills,
+.categories-container .card-box i.fa-file-code {
+    padding-left: 20px;
+}
+
+.categories-container .card-box h3 {
     text-align: center;
+    margin: 10px 0;
 }
 
-.button {
-    background-color: #007bff;
-    color: white;
+
+/* ...................................................skill-section................................................... */
+
+.skill-section {
+    height: 90vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.skill-section .image {
+    height: 450px;
+    width: 550px;
+    position: relative;
+    margin-left: 100px;
+}
+
+.skill-section .image .image01 {
+    height: 100%;
+    width: 100%;
+    z-index: 1;
+}
+
+.skill-section .image .image02 {
+    position: absolute;
+    z-index: 100;
+    height: 300px;
+    width: 400px;
+    border-radius: 8px;
+    top: 90px;
+    left: 120px;
+}
+
+.skill-section .image .anim-card {
+    height: 60px;
+    width: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px;
+    border-top-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.8);
+    position: absolute;
+    left: 70px;
+    bottom: 30px;
+    background: #eee;
+    z-index: 999;
+    animation: cardAnim 1s linear infinite forwards;
+}
+
+@keyframes cardAnim {
+    to {
+        transform: translateY(15px);
+    }
+}
+
+.skill-section .image .anim-card .icon {
+    height: 40px;
+    width: 40px;
+    background-color: rgb(1, 1, 62);
+    border-radius: 50%;
+    margin-right: 10px;
+
+}
+
+.skill-section .image .anim-card .icon i {
+    height: 100%;
+    width: 100%;
+    border-radius: 50%;
+    padding: 10px 0 0 8px;
+    color: antiquewhite;
+    font-size: 20px;
+}
+
+.skill-section .image p {
+    font-size: 14px;
+}
+
+.skill-section .image p span {
+    color: rgb(1, 177, 1);
+    font-size: 24px;
+    font-weight: 500;
+}
+
+.skill-section .text-box {
+    height: auto;
+    width: 600px;
+    padding: 20px 0;
+    margin-left: 100px;
+}
+
+.skill-section .text-box h1 {
+    font-size: 35px;
+    word-spacing: 8px;
+}
+
+.skill-section .text-box h1 span {
+    color: rgb(189, 48, 48);
+}
+
+.skill-section .text-box p {
+    font-size: 14px;
+    margin-top: 30px;
+    line-height: 25px;
+    word-spacing: 5px;
+}
+
+.skill-section .text-box .tik-box {
+    margin-top: 25px;
+    font-size: 15px;
+    font-weight: 560;
+}
+
+.skill-section .text-box .tik-box i {
+    color: rgb(110, 159, 12);
+    margin-right: 15px;
+}
+
+
+/* ...................................................footer................................................... */
+
+footer {
+    height: 60vh;
+    width: 100%;
+    background-color: #000;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+footer .footer {
+    height: 80%;
+    width: 90%;
+    display: flex;
+    padding: 60px 0 0 0;
+    justify-content: space-between;
+
+}
+
+footer .footer .about {
+    height: auto;
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    line-height: 22px;
+
+}
+
+footer .footer .about h1 img {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+
+}
+
+footer .footer .about h1 {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+footer .footer .about p {
+    font-size: 14px;
+}
+
+footer .footer .about .contact {
+    margin-top: 20px;
+}
+
+footer .footer .about .contact span {
+    font-size: 15px;
+    font-weight: 600;
+}
+
+footer .footer .about1 h3,
+footer .footer .about2 h3 {
+    margin-top: 10px;
+    margin-bottom: 10px;
+
+}
+
+footer .footer .about1 p a {
+    color: #fff;
+    line-height: 25px;
+}
+
+footer .footer .about2 p {
+    margin-bottom: 20px;
+}
+
+footer .footer .about2 input {
     border: none;
-    padding: 15px 30px;
-    margin: 10px;
-    cursor: pointer;
-    font-size: 16px;
-    border-radius: 5px;
-    transition: background-color 0.3s;
+    outline: none;
+    height: 35px;
+    width: 200px;
+    background: #fff;
+    color: #000;
+    border-radius: 6px;
+    padding-left: 20px;
 }
 
-.button:hover {
-    background-color: #0056b3;
+footer .footer .about2 button {
+    border: none;
+    outline: none;
+    height: 35px;
+    padding: 0 15px;
+    background: #0066ff;
+    color: #fff;
+    font-weight: 600;
+    font-size: 15px;
+    border-radius: 6px;
 }
 
-@media (max-width: 768px) {
-    .container {
-        padding: 10px;
-    }
-
-    .button {
-        padding: 10px 20px;
-        font-size: 14px;
-    }
+footer .footer .about2 button:hover {
+    background: #0000ff;
 }
 
-@media (max-width: 480px) {
-    .button {
-        padding: 8px 16px;
-        font-size: 12px;
-    }
+footer .footer .about2 .media-icons {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    margin-top: 30px;
+}
+
+footer .footer .about2 .media-icons a {
+    color: #fff;
+    font-size: 20px;
 }

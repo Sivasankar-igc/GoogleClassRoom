@@ -1,5 +1,5 @@
 import axios from "axios"
-import { useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { toast } from "react-toastify"
 import "../CSS/showAssignments.css"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -10,7 +10,9 @@ export default ({ isTeacher, assignmentData, userData }) => {
     const inputRef = useRef()
 
     const [message, setMessage] = useState("")
-    const [pdf, setPdf] = useState(null)
+    const [pdf, setPdf] = useState(null);
+
+    const [studentAssignment, setStudentAssignment] = useState(null)
 
     const handleAssignmentPost = (pdfFileName) => {
         axios.post(`student/postAssignment/${userData.branch}`, {
@@ -57,6 +59,22 @@ export default ({ isTeacher, assignmentData, userData }) => {
             })
     }
 
+    useEffect(() => {
+        if (!isTeacher) {
+            axios.get(`student/checkStudentAssignment?branch=${userData.branch}&stdId=${userData.studentId}&assignment=${assignmentData.assignment}`)
+                .then(res => {
+                    if (res.data.status) {
+                        setStudentAssignment(res.data.message)
+                    } else {
+                        setStudentAssignment(null)
+                    }
+                })
+                .catch(err => {
+                    console.error(err)
+                })
+        }
+    }, [assignmentData])
+
     return (
         // the upper section
         <div className="show-assignments-container">
@@ -69,7 +87,7 @@ export default ({ isTeacher, assignmentData, userData }) => {
             </div>
             <div className="assignment-form">
                 {isTeacher ? (
-                    <div>
+                    <div className="studentList-wrapper">
                         {assignmentData.studentList.map((list) => (
                             <div key={list._id} className="studentlist-container">
                                 <p>Student ID: {list.studentId}</p>
@@ -88,38 +106,57 @@ export default ({ isTeacher, assignmentData, userData }) => {
                         ))}
                     </div>
                 ) : (
-                    <form onSubmit={handleSubmit}>
-                        <input
-                            type="text"
-                            disabled
-                            value={userData.studentName}
-                            placeholder="Your Name"
-                        />
-                        <input
-                            type="text"
-                            disabled
-                            value={userData.studentId}
-                            placeholder="Your ID"
-                        />
-                        <textarea
-                            placeholder="Type Your Explanation"
-                            onChange={(e) => setMessage(e.target.value)}
-                            ref={inputRef}
-                            required
-                            className="student-assignment-textarea"
-                        ></textarea>
-                        <label htmlFor="pdf" className="student-assignment-label">Upload PDF
-                            <FontAwesomeIcon icon={faUpload} style={{ marginLeft: "10px" }} />
-                        </label>
-                        <input
-                            type="file"
-                            id="pdf"
-                            onChange={(e) => setPdf(e.target.files[0])}
-                        />
-                        <div className="btn" style={{ width: "100%", justifyContent: "center", display: "flex" }}>
-                            <button>POST</button>
+                    studentAssignment
+                        ? <div>
+                            {
+                                <div key={studentAssignment._id} className="studentlist-container">
+                                    <p>Student ID: {studentAssignment.studentId}</p>
+                                    <p>Student Name: {studentAssignment.studentName}</p>
+                                    <p>Answer: {studentAssignment.message}</p>
+                                    <p>Date: {studentAssignment.date_time.date}</p>
+                                    <p>Time: {studentAssignment.date_time.time}</p>
+                                    <a
+                                        href={`http://localhost:8000/pdf/${studentAssignment.pdf}`}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                    >
+                                        {studentAssignment.pdf}
+                                    </a>
+                                </div>
+                            }
                         </div>
-                    </form>
+                        : <form onSubmit={handleSubmit}>
+                            <input
+                                type="text"
+                                disabled
+                                value={userData.studentName}
+                                placeholder="Your Name"
+                            />
+                            <input
+                                type="text"
+                                disabled
+                                value={userData.studentId}
+                                placeholder="Your ID"
+                            />
+                            <textarea
+                                placeholder="Type Your Explanation"
+                                onChange={(e) => setMessage(e.target.value)}
+                                ref={inputRef}
+                                required
+                                className="student-assignment-textarea"
+                            ></textarea>
+                            <label htmlFor="pdf" className="student-assignment-label">Upload PDF
+                                <FontAwesomeIcon icon={faUpload} style={{ marginLeft: "10px" }} />
+                            </label>
+                            <input
+                                type="file"
+                                id="pdf"
+                                onChange={(e) => setPdf(e.target.files[0])}
+                            />
+                            <div className="btn" style={{ width: "100%", justifyContent: "center", display: "flex" }}>
+                                <button>POST</button>
+                            </div>
+                        </form>
                 )}
             </div>
         </div>

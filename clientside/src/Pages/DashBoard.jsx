@@ -67,26 +67,27 @@ export default () => {
                 <div className="dashboard-sidebar">
                     {isTeacher ? (
                         <>
-                            <p>Teacher Id: {user.teacherId}</p>
-                            <p>Teacher Name: {user.teacherName}</p>
+                            <p>Teacher Id: <span>{user.teacherId}</span></p>
+                            <p>Teacher Name: <span>{user.teacherName}</span></p>
                         </>
                     ) : (
                         <>
-                            <p>Student Id: {user.studentId}</p>
-                            <p>Student Name: {user.studentName}</p>
+                            <p>Student Id: <span>{user.studentId}</span></p>
+                            <p>Student Name: <span>{user.studentName}</span></p>
+                            <p>Assignment Completed: <span>{user.totalAssignmentCompleted}/{branchData.assignments.length}</span></p>
                         </>
                     )}
-                    <p>Branch Name : {user.branch}</p>
+                    <p>Branch Name : <span>{user.branch}</span></p>
                     <Assignments
                         assignments={branchData.assignments}
                         setCurrentState={() => setCurrentState("showassignment")}
                         setCurrentAssignment={setCurrentAssignment}
                     />
                     {isTeacher && (
-                        <button onClick={() => setCurrentState("postassignment")}>Post Assignment</button>
+                        <button onClick={() => setCurrentState("postassignment")} className={currentState === "postassignment" && `active-button`}>Post Assignment</button>
                     )}
-                    <button onClick={() => setCurrentState("branchmessages")}>Messages</button>
-                    <button onClick={() => setCurrentState("announcement")} >Announcements</button>
+                    <button onClick={() => setCurrentState("branchmessages")} className={currentState === "branchmessages" && `active-button`}>Messages</button>
+                    <button onClick={() => setCurrentState("announcement")} className={currentState === "announcement" && `active-button`}>Announcements</button>
                 </div>
                 <div className="dashboard-content">
                     {currentState === "announcement" && (

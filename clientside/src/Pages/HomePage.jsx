@@ -1,14 +1,16 @@
-import { useNavigate } from "react-router-dom"
+import { Outlet, useNavigate } from "react-router-dom"
 import "../CSS/homepage.css"
+import NavBar from "../Components/NavBar"
+import Footer from "../Components/Footer"
 
-export default ()=>{
+export default () => {
     const navigate = useNavigate()
 
-    return(
-        <div className="container">
-            <button className="button" onClick={() => navigate("login/student")}>Student Login</button>
-            <button className="button" onClick={() => navigate("login/teacher")}>Teacher Login</button>
-        </div>
-
+    return (
+        <>
+            <NavBar />
+            <Outlet />
+            <Footer />
+        </>
     )
 }

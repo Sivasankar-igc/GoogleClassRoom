@@ -8,7 +8,7 @@
 .dashboard-container {
     display: flex;
     min-height: 100vh;
-    background-color: #f7f7f7;
+    background-color: #eee;
 }
 
 .dashboard-container .dashboard-sidebar .active-button {
@@ -27,6 +27,17 @@
 
 .dashboard-sidebar p {
     margin: 0;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 11pt;
+    -webkit-text-stroke-width: .1pt;
+    padding: 5px 10px;
+    background: rgb(63, 248, 229);
+    border-radius: 10px;
+}
+
+.dashboard-sidebar p span {
+    font-size: 11pt;
+    font-family: monospace;
 }
 
 .dashboard-sidebar button {

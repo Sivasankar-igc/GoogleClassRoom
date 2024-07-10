@@ -39,7 +39,7 @@
 
 .assignment-form {
     padding: 20px;
-    background-color: #f9f9f9;
+    background-color: #eee;
     border-radius: 5px;
 }
 
@@ -116,6 +116,27 @@
 .assignment-form .studentlist-container p{
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     margin: 5px 0;
+}
+
+.assignment-form .studentList-wrapper{
+    height: 75dvh;
+    overflow-y: auto;
+    
+}
+
+.assignment-form .studentList-wrapper::-webkit-scrollbar {
+    width: max-content;
+}
+
+.assignment-form .studentList-wrapper::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.assignment-form .studentList-wrapper::-webkit-scrollbar-thumb {
+    background-color: rgb(184, 186, 186);
+    border-radius: 2rem;
+    border: .4rem solid transparent;
+    background-clip: content-box;
 }
 
 /* Responsive Design */
