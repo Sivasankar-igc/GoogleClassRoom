@@ -1,4 +1,5 @@
 import branchCol from "../../Models/branchModel.mjs";
+import studentCol from "../../Models/studentModel.mjs";
 import { generateDate } from "../../utils/generateDate.mjs";
 import { generateTime } from "../../utils/generateTime.mjs";
 
@@ -21,7 +22,7 @@ export default async (req, res) => {
                 }
             }
         }, { new: true })
-        
+        await studentCol.findOneAndUpdate({ studentId: studentId }, { $inc: { totalAssignmentCompleted: 1 } })
         res.status(200).json({ status: response !== null && response !== undefined, message: response })
     } catch (error) {
         console.error(`Posting Assignment : ${error}`)

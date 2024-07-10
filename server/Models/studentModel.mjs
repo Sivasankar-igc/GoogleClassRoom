@@ -5,6 +5,7 @@ const studentSchema = new mongoose.Schema({
     studentName: String,
     studentPassword: String,
     branch: String,
+    totalAssignmentCompleted: { type: Number, default: 0 }
 })
 
 const studentCol = new mongoose.model("studentCollection", studentSchema)
