@@ -1,19 +1,29 @@
-export default ({ assignments, setCurrentState, setCurrentAssignment }) => {
+// Import CSS file
+import "../CSS/assignments.css";
 
+// Define the component
+const Assignments = ({ assignments, setCurrentState, setCurrentAssignment }) => {
     return (
-        <div>
-            <select onChange={(e) => {
-                const data = assignments.find(assignment => assignment.assignment === e.target.value)
-                setCurrentAssignment(data)
-                setCurrentState();
-            }}>
-                <option value="">Assignment</option>
-                {
-                    assignments.map(assignment => (
-                        <option key={assignment._id} value={assignment.assignment}>{assignment.assignment}</option>
-                    ))
-                }
+        <div className="assignments-container">
+            <select
+                onChange={(e) => {
+                    const selectedAssignment = e.target.value;
+                    const data = assignments.find(
+                        (assignment) => assignment.assignment === selectedAssignment
+                    );
+                    setCurrentAssignment(data);
+                    setCurrentState();
+                }}
+            >
+                <option value="">Select Assignment</option>
+                {assignments.map((assignment) => (
+                    <option key={assignment._id} value={assignment.assignment}>
+                        {assignment.assignment.substr(0,40)}...
+                    </option>
+                ))}
             </select>
         </div>
-    )
-}
+    );
+};
+
+export default Assignments;

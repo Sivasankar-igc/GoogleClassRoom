@@ -6,7 +6,7 @@ import { router as teacherRouter } from "./Routes/teacherRoute.mjs"
 import { router as studentRouter } from "./Routes/studentRoute.mjs"
 import { router as otherRotuer } from "./Routes/otherRoutes.mjs";
 import multer from "multer";
-import { uploadImage } from "./utils/uploadImage.mjs";
+import { uploadPdf } from "./utils/uploadPdf.mjs";
 
 dotenv.config()
 
@@ -24,9 +24,9 @@ mongoose.connect(MONGODB_URI)
     .catch(err => console.error(`Database connection error : ${err}`))
 
 
-web.use("/images", express.static("./Images"))
+web.use("/pdf", express.static("./PDFs"))
 
-web.post("/api/uploadImage",uploadImage.array("image"), async(req, res)=>{
+web.post("/api/uploadPdf",uploadPdf.single("pdf"), async(req, res)=>{
     res.status(200).send(req.file.filename)
 })
 

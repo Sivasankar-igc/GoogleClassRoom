@@ -5,7 +5,7 @@ import { generateTime } from "../../utils/generateTime.mjs";
 export default async (req, res) => {
     try {
         const branch = req.params.branch
-        const { assignment, studentName, studentId, message, image } = req.body;
+        const { assignment, studentName, studentId, message, pdf } = req.body;
 
         const response = await branchCol.findOneAndUpdate({ branchName: branch, "assignments.assignment": assignment }, {
             $push: {
@@ -13,7 +13,7 @@ export default async (req, res) => {
                     studentName,
                     studentId,
                     message,
-                    image,
+                    pdf,
                     date_time: {
                         date: generateDate(),
                         time: generateTime()

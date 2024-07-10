@@ -2,6 +2,7 @@ import axios from "axios";
 import { useState } from "react"
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import "../CSS/login.css"
 
 export default ({ userType }) => {
 
@@ -13,7 +14,7 @@ export default ({ userType }) => {
     })
 
     const formInput = [
-        { type: "text", name: "id", placeholder: `Enter Your Mail` },
+        { type: "text", name: "id", placeholder: `Enter Your Id` },
         { type: "password", name: "password", placeholder: "Enter Your Password" },
     ]
 
@@ -49,17 +50,24 @@ export default ({ userType }) => {
     }
 
     return (
-        <div>
-            <form onSubmit={handleSubmit} >
+        <div className="login-container">
+            <form className="login-form" onSubmit={handleSubmit} >
                 {
                     formInput.map((input, index) => (
-                        <div key={index}>
-                            <input type={input.type} name={input.name} placeholder={input.placeholder} onChange={handleInput} />
+                        <div key={index} className="form-group">
+                            <input 
+                                className="form-input" 
+                                type={input.type} 
+                                name={input.name} 
+                                placeholder={input.placeholder} 
+                                onChange={handleInput} 
+                            />
                         </div>
                     ))
                 }
-                <button>Login</button>
-                <p>Don't have an account?</p><Link to={`/signin/${userType}`}>Signin Here</Link>
+                <button className="login-button">Login</button>
+                <p className="signup-text">Don't have an account? <Link className="signup-link" to={`/signin/${userType}`}>Signin Here</Link></p>
+                
             </form>
         </div>
     )

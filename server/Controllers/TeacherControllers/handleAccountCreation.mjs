@@ -15,7 +15,7 @@ export const signin = async (req, res) => {
 
         else {
             const data = new teacherCol({
-                teacherId: uuidv4(),
+                teacherId: `teacher${Date.now().toString().substring(8, 13)}`,
                 teacherName: name,
                 teacherPassword: await generateEncryptedPassword(pass),
                 branch: branch

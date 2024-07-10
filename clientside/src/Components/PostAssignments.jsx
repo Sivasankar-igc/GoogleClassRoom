@@ -1,6 +1,7 @@
 import axios from "axios"
 import { useRef, useState } from "react"
 import { toast } from "react-toastify"
+import "../CSS/postAssignments.css"
 
 export default ({ teacherData }) => {
 
@@ -25,11 +26,22 @@ export default ({ teacherData }) => {
             })
     }
     return (
-        <div>
-            <form onSubmit={handleSubmit}>
-                <input type="text" value={teacherData.teacherName} disabled />
-                <input type="text" onChange={(e) => setQuestion(e.target.value)} ref={inputRef} />
-                <button>POST</button>
+        <div className="post-assignments-container">
+            <form className="post-assignments-form" onSubmit={handleSubmit}>
+                <input
+                    className="teacher-name-input"
+                    type="text"
+                    value={teacherData.teacherName}
+                    disabled
+                />
+                <textarea
+                    className="assignment-input"
+                    type="text"
+                    placeholder="Enter Assignment Question"
+                    onChange={(e) => setQuestion(e.target.value)}
+                    ref={inputRef}
+                />
+                <button className="post-button">POST</button>
             </form>
         </div>
     )

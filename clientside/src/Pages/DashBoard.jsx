@@ -7,6 +7,9 @@ import ShowAssignments from "../Components/ShowAssignments";
 import BranchMessages from "../Components/BranchMessages";
 import axios from "axios"
 import { toast } from "react-toastify";
+import "../CSS/dashboard.css"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCompass } from "@fortawesome/free-solid-svg-icons";
 
 export default () => {
     const state = useLocation().state;
@@ -18,6 +21,8 @@ export default () => {
     const [announcements, setAnnouncements] = useState(null)
     const [branchData, setBranchData] = useState(null)
     const [currentAssignment, setCurrentAssignment] = useState(null)
+
+    const [sidebarActive, setSidebarActive] = useState(false);
 
     useEffect(() => {
         //fetch the branch according to the student or teacher
@@ -46,34 +51,62 @@ export default () => {
             })
     }, [])
 
+    const toggleSidebar = () => {
+        setSidebarActive(!sidebarActive);
+    };
+
     if (announcements && branchData) {
 
         return (
-            <>
-                <div>
-                    {
-                        isTeacher
-                            ? <>
-                                Teacher Id :{user.teacherId}
-                                Teacher Name :{user.teacherName}
-                            </>
-                            : <>
-                                Student Id :{user.studentId}
-                                Student Name :{user.studentName}
-                            </>
-                    }
+            <div className={`dashboard-container ${sidebarActive ? "sidebar-active" : ""}`}>
+                <div className="hamburger-menu">
+                    <button className="hamburger-button" onClick={toggleSidebar}>
+                        <FontAwesomeIcon icon={faCompass} spin />
+                    </button>
                 </div>
-                <div>
-                    <Assignments assignments={branchData.assignments} setCurrentState={() => setCurrentState("showassignment")} setCurrentAssignment={setCurrentAssignment} />
-                    {isTeacher && <button onClick={() => setCurrentState("postassignment")}>Post Assignment</button>}
+                <div className="dashboard-sidebar">
+                    {isTeacher ? (
+                        <>
+                            <p>Teacher Id: {user.teacherId}</p>
+                            <p>Teacher Name: {user.teacherName}</p>
+                        </>
+                    ) : (
+                        <>
+                            <p>Student Id: {user.studentId}</p>
+                            <p>Student Name: {user.studentName}</p>
+                        </>
+                    )}
+                    <p>Branch Name : {user.branch}</p>
+                    <Assignments
+                        assignments={branchData.assignments}
+                        setCurrentState={() => setCurrentState("showassignment")}
+                        setCurrentAssignment={setCurrentAssignment}
+                    />
+                    {isTeacher && (
+                        <button onClick={() => setCurrentState("postassignment")}>Post Assignment</button>
+                    )}
                     <button onClick={() => setCurrentState("branchmessages")}>Messages</button>
-                    <button onClick={() => setCurrentState("announcement")}>Announcements</button>
-                    {currentState === "announcement" && <Announcement isTeacher={isTeacher} data={user} announcements={announcements} />}
-                    {currentState === "postassignment" && <PostAssignments teacherData={user} branchName={branchData.branchName} />}
-                    {currentState === "showassignment" && <ShowAssignments isTeacher={isTeacher} assignmentData={currentAssignment} userData={user} />}
-                    {currentState === "branchmessages" && <BranchMessages isTeacher={isTeacher} teacherData={user} branchMessages={branchData.messages} />}
+                    <button onClick={() => setCurrentState("announcement")} >Announcements</button>
                 </div>
-            </>
+                <div className="dashboard-content">
+                    {currentState === "announcement" && (
+                        <Announcement isTeacher={isTeacher} data={user} announcements={announcements} />
+                    )}
+                    {currentState === "postassignment" && (
+                        <PostAssignments teacherData={user} branchName={branchData.branchName} />
+                    )}
+                    {currentState === "showassignment" && (
+                        <ShowAssignments isTeacher={isTeacher} assignmentData={currentAssignment} userData={user} />
+                    )}
+                    {currentState === "branchmessages" && (
+                        <BranchMessages
+                            isTeacher={isTeacher}
+                            teacherData={user}
+                            branchMessages={branchData.messages}
+                        />
+                    )}
+                </div>
+            </div>
         )
     } else {
         return (

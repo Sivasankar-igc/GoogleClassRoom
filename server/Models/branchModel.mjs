@@ -15,7 +15,7 @@ const branchSchema = new mongoose.Schema({
                     studentName: String,
                     studentId: String,
                     message: String,
-                    image: String,
+                    pdf: String,
                     date_time: {
                         date: String,
                         time: String

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import axios from "axios"
+import "../CSS/signin.css"
 
 export default ({ userType }) => {
     const navigate = useNavigate()
@@ -68,33 +69,42 @@ export default ({ userType }) => {
     }
 
     return (
-        <div>
-            {
-                branches.length > 0 &&
-                <form onSubmit={handleSubmit}>
-                    {
-                        formInput.map((input, index) => (
-                            <div key={index}>
-                                {
-                                    input.type !== "select"
-                                        ? <input type={input.type} name={input.name} placeholder={input.placeholder} onChange={handleInput} />
-                                        : <select name={input.name} onChange={handleInput}>
-                                            <option value="">--choose-branch--</option>
-                                            {
-                                                branches.map(branch => (
-                                                    <option key={branch.branchName} value={branch.branchName}>{branch.branchName}</option>
-                                                ))
-                                            }
-                                        </select>
-                                }
-                            </div>
-                        ))
-                    }
-                    <button>Signin</button>
-                    <p>Have an account? <Link to={`/login/${userType}`}>Login</Link></p>
-                </form>
-            }
-        </div>
+        <div className="signin-container">
+        {
+            branches.length > 0 &&
+            <form className="signin-form" onSubmit={handleSubmit}>
+                {
+                    formInput.map((input, index) => (
+                        <div key={index} className="form-group">
+                            {
+                                input.type !== "select"
+                                    ? <input 
+                                        className="form-input" 
+                                        type={input.type} 
+                                        name={input.name} 
+                                        placeholder={input.placeholder} 
+                                        onChange={handleInput} 
+                                      />
+                                    : <select 
+                                        className="form-select" 
+                                        name={input.name} 
+                                        onChange={handleInput}>
+                                        <option value="">--choose-branch--</option>
+                                        {
+                                            branches.map(branch => (
+                                                <option key={branch.branchName} value={branch.branchName}>{branch.branchName}</option>
+                                            ))
+                                        }
+                                    </select>
+                            }
+                        </div>
+                    ))
+                }
+                <button className="signin-button">Signin</button>
+                <p className="login-text">Have an account? <Link className="login-link" to={`/login/${userType}`}>Login</Link></p>
+            </form>
+        }
+    </div>
     )
 
 }
