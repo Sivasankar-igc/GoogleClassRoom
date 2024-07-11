@@ -118,6 +118,15 @@
     margin: 5px 0;
 }
 
+.assignment-form .studentlist-container  button{
+    margin: 15px 0;
+    transition: .4s all ease;
+}
+
+.assignment-form .studentlist-container  button:hover{
+    transform: scale(.96);
+}
+
 .assignment-form .studentList-wrapper{
     height: 75dvh;
     overflow-y: auto;

@@ -75,6 +75,15 @@ export default ({ isTeacher, assignmentData, userData }) => {
         }
     }, [assignmentData])
 
+    const removeAssignment = (stdId) => {
+        axios.delete(`student/removeAssignment?stdId=${stdId}&branch=${userData.branch}&assignment=${assignmentData.assignment}`)
+            .then(res => toast(res.data.message))
+            .catch(err => {
+                console.error(err)
+                toast("Network connection error")
+            })
+    }
+
     return (
         // the upper section
         <div className="show-assignments-container">
@@ -115,13 +124,16 @@ export default ({ isTeacher, assignmentData, userData }) => {
                                     <p>Answer: {studentAssignment.message}</p>
                                     <p>Date: {studentAssignment.date_time.date}</p>
                                     <p>Time: {studentAssignment.date_time.time}</p>
-                                    <a
-                                        href={`http://localhost:8000/pdf/${studentAssignment.pdf}`}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                    >
-                                        {studentAssignment.pdf}
-                                    </a>
+                                    <p>
+                                        <a
+                                            href={`http://localhost:8000/pdf/${studentAssignment.pdf}`}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                        >
+                                            {studentAssignment.pdf}
+                                        </a>
+                                    </p>
+                                    <button onClick={() => removeAssignment(studentAssignment.studentId)}>Remove</button>
                                 </div>
                             }
                         </div>

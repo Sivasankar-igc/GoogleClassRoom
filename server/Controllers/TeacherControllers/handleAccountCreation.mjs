@@ -8,10 +8,10 @@ export const signin = async (req, res) => {
         const { name, pass, branch } = req.body;
 
         if (!name || !pass || !branch)
-            res.status(200).json({ status: false, message: "All Fields must be filled!!!" })
+            return res.status(200).json({ status: false, message: "All Fields must be filled!!!" })
 
         if (!new RegExp("^[a-zA-Z][a-zA-Z.\\s]+[a-zA-Z]+$").test(name.trim()))
-            res.status(200).json({ status: false, message: "Invalid Name" })
+            return res.status(200).json({ status: false, message: "Invalid Name" })
 
         else {
             const data = new teacherCol({
@@ -22,7 +22,7 @@ export const signin = async (req, res) => {
             })
 
             const response = await data.save()
-            res.status(200).json({
+            return res.status(200).json({
                 status: response !== undefined && response !== null,
                 message: response
             })
