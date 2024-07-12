@@ -13,8 +13,9 @@ export default () => {
                         <button><Link to={`/login/student`}>Student Login</Link></button>
                         <button><Link to={`/login/teacher`}>Teacher Login</Link></button>
                     </div>
-
-
+                    {/* 
+                    <input type="checkbox" id="menu-bar">
+                    <label for="menu-bar"><i class="fa-solid fa-bars"></i></label> */}
 
                 </div>
 

@@ -1,6 +1,15 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {  faFacebook, faLinkedin, faInstagram, faTwitter,faYoutube, faWhatsapp} from "@fortawesome/free-brands-svg-icons";
+import { faFacebook, faLinkedin, faInstagram, faTwitter, faYoutube, faWhatsapp } from "@fortawesome/free-brands-svg-icons";
+import { useState } from "react";
+import axios from "axios"
+import { toast } from "react-toastify"
+
 export default () => {
+    const [contact, setContact] = useState("")
+    const handleSubmit = () => {
+        axios.post("contact", {contact})
+        toast("Submitted")
+    }
     return (
         <footer>
             <div className="footer">
@@ -27,26 +36,26 @@ export default () => {
                 <div className="about2">
                     <h3>Contacts</h3>
                     <p>Enter Your email address to registrer to our <br />Newsletter subscription</p>
-                    <input type="email" placeholder="Your email" />
-                    <button>Subscribe <i className="fa-solid fa-arrow-right"></i></button>
+                    <input type="email" placeholder="Your email" onChange={(e) => setContact(e.target.value)} />
+                    <button onClick={handleSubmit}>Subscribe <i className="fa-solid fa-arrow-right"></i></button>
                     <div className="media-icons">
                         <a href="">
                             <FontAwesomeIcon icon={faFacebook} />
                         </a>
                         <a href="">
-                            <FontAwesomeIcon icon={faLinkedin}/>
+                            <FontAwesomeIcon icon={faLinkedin} />
                         </a>
                         <a href="">
-                        <FontAwesomeIcon icon={faInstagram}/>
+                            <FontAwesomeIcon icon={faInstagram} />
                         </a>
                         <a href="">
-                            <FontAwesomeIcon icon={faTwitter}/>
+                            <FontAwesomeIcon icon={faTwitter} />
                         </a>
                         <a href="">
-                            <FontAwesomeIcon icon={faYoutube}/>
+                            <FontAwesomeIcon icon={faYoutube} />
                         </a>
                         <a href="">
-                            <FontAwesomeIcon icon={faWhatsapp}/>
+                            <FontAwesomeIcon icon={faWhatsapp} />
                         </a>
                     </div>
 
